@@ -1,0 +1,18 @@
+port: 7880
+bind_addresses: ["0.0.0.0"]
+log_level: info
+
+rtc:
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 60000
+  use_external_ip: true
+
+turn:
+  enabled: true
+  domain: video.your-domain.com  # Замените на ваш домен
+  udp_port: 3478
+  tls_port: 5349
+
+keys:
+  devkey: secret  # Замените на ваши ключи из .env

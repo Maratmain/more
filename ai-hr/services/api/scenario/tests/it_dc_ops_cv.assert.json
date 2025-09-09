@@ -1,0 +1,154 @@
+{
+  "cv_id": "it_dc_ops_golden",
+  "profile": "it_dc_ops",
+  "description": "Эталонное резюме ИТ-специалиста (ЦОД) для тестирования сценариев",
+  "cv_content": {
+    "experience": [
+      "4 года опыта эксплуатации и администрирования дата-центра",
+      "Монтаж и демонтаж серверного оборудования в стойках",
+      "Настройка и обслуживание Active Directory, DNS, DHCP",
+      "Работа с групповыми политиками (GPO) и управление пользователями",
+      "Обработка инцидентов через Service Desk и решение проблем 1-3 уровня",
+      "Установка и настройка антивирусного ПО Kaspersky",
+      "Администрирование печати и принтеров HP",
+      "Поддержка Windows Server, Linux (CentOS, Ubuntu), macOS"
+    ],
+    "skills": [
+      "Создание и развертывание образов ОС через WDS (Windows Deployment Services)",
+      "Диагностика и устранение неисправностей серверного оборудования",
+      "Мониторинг состояния инфраструктуры и среды в серверных",
+      "Ведение документации по инвентаризации оборудования",
+      "Работа с сетевым оборудованием и кабельными системами",
+      "Обеспечение порядка и соблюдения стандартов в ЦОД"
+    ],
+    "tools": [
+      "Windows Server 2016/2019/2022",
+      "Active Directory, DNS, DHCP",
+      "Group Policy Management",
+      "WDS (Windows Deployment Services)",
+      "Kaspersky Endpoint Security",
+      "HP Printer Management",
+      "Service Desk системы",
+      "CMDB/DCIM платформы"
+    ],
+    "hardware_experience": [
+      "x86 серверы (Dell, HP, Lenovo)",
+      "Сетевое оборудование (Cisco, HP)",
+      "RAID контроллеры (базовые настройки)",
+      "Кабельные системы и оптоволокно"
+    ]
+  },
+  "expected_path": {
+    "description": "Ожидаемый путь прохождения интервью на основе заявленных навыков",
+    "nodes": [
+      {
+        "node_id": "hw_l1_install",
+        "expected_score": 0.9,
+        "reason": "Прямой опыт монтажа/демонтажа серверов в стойках"
+      },
+      {
+        "node_id": "hw_l2_raid_bmc",
+        "expected_score": 0.6,
+        "reason": "Базовые знания RAID, но нет глубокого опыта с BMC"
+      },
+      {
+        "node_id": "hw_l3_incidents",
+        "expected_score": 0.85,
+        "reason": "Опыт обработки инцидентов через Service Desk"
+      },
+      {
+        "node_id": "net_l1_lan_san",
+        "expected_score": 0.8,
+        "reason": "Опыт работы с сетевым оборудованием"
+      },
+      {
+        "node_id": "net_l2_troubleshooting",
+        "expected_score": 0.75,
+        "reason": "Диагностика сетевых проблем, но не глубокий уровень"
+      },
+      {
+        "node_id": "cable_l1_scs",
+        "expected_score": 0.7,
+        "reason": "Базовые знания кабельных систем"
+      },
+      {
+        "node_id": "cable_l2_maintenance",
+        "expected_score": 0.8,
+        "reason": "Опыт поддержания порядка в серверных"
+      },
+      {
+        "node_id": "sys_l1_os_imaging",
+        "expected_score": 0.9,
+        "reason": "Прямой опыт с WDS и созданием образов ОС"
+      },
+      {
+        "node_id": "sys_l2_ad_gpo",
+        "expected_score": 0.95,
+        "reason": "Глубокий опыт с AD, DNS, DHCP, GPO"
+      },
+      {
+        "node_id": "cmdb_l1_systems",
+        "expected_score": 0.7,
+        "reason": "Базовые знания CMDB/DCIM"
+      },
+      {
+        "node_id": "cmdb_l2_analytics",
+        "expected_score": 0.6,
+        "reason": "Ограниченный опыт с аналитикой и отчетностью"
+      }
+    ]
+  },
+  "equivalence_branches": {
+    "description": "Ветки эквивалентности для компенсации недостающих навыков",
+    "raid_bmc_alternative": {
+      "condition": "Нет прямого опыта с RAID/BMC",
+      "alternative_path": "sys_l1_os_imaging",
+      "reason": "Опыт с WDS и образами ОС компенсирует недостаток знаний по RAID/BMC",
+      "expected_score": 0.8
+    },
+    "deep_networking_alternative": {
+      "condition": "Ограниченный опыт с SAN",
+      "alternative_path": "sys_l2_ad_gpo",
+      "reason": "Глубокие знания AD/GPO компенсируют недостаток SAN-опыта",
+      "expected_score": 0.85
+    }
+  },
+  "test_scenarios": [
+    {
+      "scenario": "Strong candidate",
+      "description": "Кандидат с полным опытом по всем блокам",
+      "expected_overall_score": 0.8,
+      "expected_strengths": ["OS_Imaging_GPO_AD", "DC_Housekeeping", "Incident_Handling"],
+      "expected_weaknesses": ["CMDB_DCIM_Reporting"]
+    },
+    {
+      "scenario": "RAID/BMC alternative",
+      "description": "Кандидат без опыта RAID/BMC, но с сильным опытом AD/GPO",
+      "cv_modifications": {
+        "remove_skills": ["RAID контроллеры", "BMC управление"],
+        "emphasize_skills": ["Active Directory", "GPO", "WDS"]
+      },
+      "expected_overall_score": 0.75,
+      "expected_strengths": ["OS_Imaging_GPO_AD", "DC_Housekeeping"],
+      "expected_weaknesses": ["DC_HW_x86_RAID_BMC"],
+      "use_equivalence": true
+    },
+    {
+      "scenario": "Service Desk focus",
+      "description": "Кандидат с фокусом на Service Desk и инцидентах",
+      "cv_modifications": {
+        "emphasize_skills": ["Service Desk", "инциденты", "диагностика"]
+      },
+      "expected_overall_score": 0.7,
+      "expected_strengths": ["Incident_Handling", "DC_Housekeeping"],
+      "expected_weaknesses": ["LAN_SAN_Networking", "CMDB_DCIM_Reporting"]
+    }
+  ],
+  "validation_rules": {
+    "min_expected_score": 0.6,
+    "required_strengths": ["OS_Imaging_GPO_AD", "DC_Housekeeping"],
+    "acceptable_weaknesses": ["CMDB_DCIM_Reporting", "Tooling_Excel_Visio"],
+    "critical_failures": ["Incident_Handling"],
+    "equivalence_threshold": 0.7
+  }
+}

@@ -1,0 +1,9 @@
+app.your-domain.com {  # Замените на ваш домен
+  reverse_proxy 127.0.0.1:5173
+}
+
+video.your-domain.com {  # Замените на ваш домен
+  reverse_proxy 127.0.0.1:7880 {
+    header_up Host {host}
+  }
+}

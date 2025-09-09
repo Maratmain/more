@@ -1,0 +1,187 @@
+version: '3.8'
+
+services:
+  # === LiveKit сервер ===
+  livekit:
+    image: livekit/livekit-server:latest
+    command: ["--config", "/etc/livekit.yaml"]
+    volumes:
+      - ./deploy/livekit.yaml:/etc/livekit.yaml:ro
+    network_mode: "host"
+    restart: unless-stopped
+    environment:
+      - LIVEKIT_API_KEY=${LIVEKIT_API_KEY}
+      - LIVEKIT_API_SECRET=${LIVEKIT_API_SECRET}
+
+  # === Caddy reverse proxy ===
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - DOMAIN=${DOMAIN}
+
+  # === LLM локальный (llama.cpp) ===
+  llm-local:
+    build: ./services/llm-local
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - llm_models:/models
+    environment:
+      - LLM_MODEL_URL=${LLM_MODEL_URL}
+      - LLM_MODEL=${LLM_MODEL}
+      - LLM_PORT=${LLM_PORT}
+      - LLM_CTX=${LLM_CTX}
+      - LLM_THREADS=${LLM_THREADS}
+
+  # === Токен-сервер ===
+  token-server:
+    build: ./services/token-server
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - LIVEKIT_API_KEY=${LIVEKIT_API_KEY}
+      - LIVEKIT_API_SECRET=${LIVEKIT_API_SECRET}
+      - LIVEKIT_WS_URL=${LIVEKIT_WS_URL}
+      - CORS_ORIGIN=${CORS_ORIGIN}
+
+  # === Realtime клиент ===
+  realtime-client:
+    build: ./services/realtime-client
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - token-server
+
+  # === Telegram Bot API сервер ===
+  bot-api:
+    image: aiogram/telegram-bot-api:latest
+    command: ["--local", "--http-ip", "0.0.0.0", "--http-port", "8081"]
+    network_mode: "host"
+    restart: unless-stopped
+
+  # === Qdrant векторная БД ===
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+
+  # === Основной API ===
+  api:
+    build: ./services/api
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - REPORT_SERVICE_URL=${REPORT_API_URL}
+      - QDRANT_URL=${QDRANT_URL}
+      - QDRANT_API_KEY=${QDRANT_API_KEY}
+    depends_on:
+      - qdrant
+
+  # === CV сервис ===
+  cv:
+    build: ./services/cv
+    restart: unless-stopped
+    ports:
+      - "8007:8007"
+    environment:
+      - QDRANT_URL=${QDRANT_URL}
+      - QDRANT_API_KEY=${QDRANT_API_KEY}
+      - QDRANT_COLLECTION=${QDRANT_COLLECTION}
+      - EMBEDDER=${EMBEDDER}
+      - CHUNK_SIZE=${CHUNK_SIZE}
+      - CHUNK_OVERLAP=${CHUNK_OVERLAP}
+    depends_on:
+      - qdrant
+
+  # === Менеджер диалогов ===
+  dm:
+    build: ./services/dm
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+    environment:
+      - LLM_ENGINE=${LLM_ENGINE}
+      - LLM_PROVIDER=${LLM_PROVIDER}
+      - LLM_BASE_URL=${LLM_BASE_URL}
+      - LLM_MODEL=${LLM_MODEL}
+      - LLM_JSON_SCHEMA_ENFORCE=${LLM_JSON_SCHEMA_ENFORCE}
+      - DRILL_THRESHOLD=${DRILL_THRESHOLD}
+    depends_on:
+      - llm-local
+
+  # === ASR сервис ===
+  asr:
+    build: ./services/asr
+    restart: unless-stopped
+    ports:
+      - "8003:8003"
+    volumes:
+      - asr_models:/app/models
+
+  # === TTS сервис ===
+  tts:
+    build: ./services/tts
+    restart: unless-stopped
+    ports:
+      - "8004:8004"
+    volumes:
+      - tts_models:/app/models
+
+  # === Сервис отчетов ===
+  report:
+    build: ./services/report
+    restart: unless-stopped
+    ports:
+      - "8005:8005"
+
+  # === Сервис метрик ===
+  metrics:
+    build: ./services/metrics
+    restart: unless-stopped
+    ports:
+      - "8006:8006"
+    volumes:
+      - metrics_data:/app/data
+
+  # === Telegram бот ===
+  tg-bot:
+    build: ./services/tg-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_ADMINS=${TELEGRAM_ADMINS}
+      - TELEGRAM_USE_LOCAL_BOT_API=${TELEGRAM_USE_LOCAL_BOT_API}
+      - TELEGRAM_BOT_API_URL=${TELEGRAM_BOT_API_URL}
+      - CV_SERVICE_URL=${CV_SERVICE_URL}
+      - REPORT_API_URL=${REPORT_API_URL}
+      - MAIN_API_URL=${MAIN_API_URL}
+      - MAX_FILE_SIZE_MB=${MAX_FILE_SIZE_MB}
+    depends_on:
+      - bot-api
+      - api
+      - cv
+      - report
+
+volumes:
+  caddy_data:
+  caddy_config:
+  llm_models:
+  qdrant_data:
+  asr_models:
+  tts_models:
+  metrics_data:

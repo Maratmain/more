@@ -1,0 +1,117 @@
+Алексей Петров
+Senior Python Developer
+
+КОНТАКТНАЯ ИНФОРМАЦИЯ:
+Email: alexey.petrov@email.com
+Телефон: +7 (999) 123-45-67
+LinkedIn: linkedin.com/in/alexey-petrov
+GitHub: github.com/alexey-petrov
+Локация: Москва, Россия
+
+ПРОФЕССИОНАЛЬНОЕ РЕЗЮМЕ:
+Опытный Python разработчик с 5+ годами опыта в создании высоконагруженных веб-приложений. 
+Специализируюсь на Django, FastAPI, микросервисной архитектуре и работе с большими данными. 
+Имею опыт руководства командой разработчиков и внедрения DevOps практик.
+
+ОПЫТ РАБОТЫ:
+
+Senior Python Developer | TechCorp | 2021 - настоящее время
+• Разработка и поддержка высоконагруженного API для e-commerce платформы (10M+ запросов/день)
+• Архитектура микросервисов с использованием Django REST Framework и FastAPI
+• Интеграция с внешними сервисами (платежи, логистика, аналитика)
+• Оптимизация производительности: снижение времени отклика на 40%
+• Внедрение CI/CD пайплайнов с GitLab CI и Docker
+• Менторство junior разработчиков
+
+Python Developer | StartupXYZ | 2019 - 2021
+• Разработка backend для мобильного приложения с использованием Django
+• Создание системы аналитики в реальном времени с Redis и Celery
+• Работа с PostgreSQL, MongoDB, Elasticsearch
+• Интеграция с внешними API (социальные сети, платежные системы)
+• Участие в планировании спринтов и code review
+
+Junior Python Developer | WebStudio | 2018 - 2019
+• Разработка веб-приложений на Django и Flask
+• Создание REST API для мобильных приложений
+• Работа с базами данных MySQL и PostgreSQL
+• Верстка frontend с использованием HTML, CSS, JavaScript
+• Тестирование и отладка приложений
+
+ТЕХНИЧЕСКИЕ НАВЫКИ:
+
+Языки программирования:
+• Python (5+ лет) - Django, FastAPI, Flask, asyncio
+• JavaScript - Node.js, React (базовый уровень)
+• SQL - PostgreSQL, MySQL, MongoDB
+• Bash scripting, Linux administration
+
+Фреймворки и библиотеки:
+• Django, Django REST Framework, FastAPI
+• Celery, Redis, RabbitMQ
+• SQLAlchemy, Alembic
+• Pytest, unittest, coverage
+• Requests, aiohttp, httpx
+
+Базы данных:
+• PostgreSQL (основная), MySQL, MongoDB
+• Redis для кэширования и очередей
+• Elasticsearch для поиска и аналитики
+• ClickHouse для аналитических запросов
+
+DevOps и инфраструктура:
+• Docker, Docker Compose, Kubernetes
+• GitLab CI/CD, GitHub Actions
+• AWS (EC2, RDS, S3, Lambda)
+• Nginx, Gunicorn, uWSGI
+• Prometheus, Grafana для мониторинга
+
+Инструменты разработки:
+• Git, GitLab, GitHub
+• PyCharm, VS Code
+• Jupyter Notebook для анализа данных
+• Postman, curl для тестирования API
+
+ОБРАЗОВАНИЕ:
+
+Московский государственный университет им. М.В. Ломоносова
+Факультет вычислительной математики и кибернетики
+Специальность: Прикладная математика и информатика
+Год окончания: 2018
+
+СЕРТИФИКАЦИИ:
+
+• AWS Certified Developer Associate (2022)
+• Django REST Framework Certification (2021)
+• Python Institute PCAP (2020)
+
+ПРОЕКТЫ:
+
+1. E-commerce API Platform (2022-2023)
+   Технологии: Django, PostgreSQL, Redis, Docker, Kubernetes
+   Описание: Высоконагруженная платформа для интернет-магазина с микросервисной архитектурой
+   Результат: Обработка 10M+ запросов в день, время отклика <100ms
+
+2. Real-time Analytics System (2021-2022)
+   Технологии: FastAPI, ClickHouse, Redis, WebSockets
+   Описание: Система аналитики в реальном времени для мобильного приложения
+   Результат: Обработка 1M+ событий в минуту
+
+3. Microservices Migration (2020-2021)
+   Технологии: Docker, Kubernetes, Django, FastAPI
+   Описание: Миграция монолитного приложения на микросервисную архитектуру
+   Результат: Улучшение масштабируемости и надежности системы
+
+ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ:
+
+• Участие в open-source проектах (contributor в Django, FastAPI)
+• Выступления на конференциях Python и DevOps
+• Менторство в программе "Школа 21"
+• Знание английского языка (Upper-Intermediate)
+• Готовность к релокации и командировкам
+
+ЛИЧНЫЕ КАЧЕСТВА:
+• Ответственность и пунктуальность
+• Способность к быстрому обучению
+• Командная работа и лидерские качества
+• Аналитическое мышление
+• Креативный подход к решению задач

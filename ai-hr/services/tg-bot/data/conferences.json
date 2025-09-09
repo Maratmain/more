@@ -1,0 +1,132 @@
+{
+  "Data/AI": {
+    "title": "🤖 Data & AI Конференции",
+    "description": "Конференции по анализу данных, машинному обучению и искусственному интеллекту",
+    "links": [
+      {
+        "name": "Data Science Conference",
+        "url": "https://www.datascienceconference.com/",
+        "description": "Ежегодная конференция по науке о данных"
+      },
+      {
+        "name": "AI Summit",
+        "url": "https://www.aisummit.com/",
+        "description": "Всемирный саммит по искусственному интеллекту"
+      },
+      {
+        "name": "ML Conference",
+        "url": "https://www.mlconference.com/",
+        "description": "Конференция по машинному обучению"
+      },
+      {
+        "name": "Big Data World",
+        "url": "https://www.bigdataworld.com/",
+        "description": "Конференция по большим данным"
+      }
+    ]
+  },
+  "Dev": {
+    "title": "💻 Development Конференции",
+    "description": "Конференции для разработчиков и программистов",
+    "links": [
+      {
+        "name": "DevConf",
+        "url": "https://www.devconf.com/",
+        "description": "Конференция разработчиков"
+      },
+      {
+        "name": "CodeConf",
+        "url": "https://www.codeconf.com/",
+        "description": "Конференция по программированию"
+      },
+      {
+        "name": "TechCrunch Disrupt",
+        "url": "https://techcrunch.com/events/disrupt/",
+        "description": "Конференция технологических стартапов"
+      },
+      {
+        "name": "Web Summit",
+        "url": "https://websummit.com/",
+        "description": "Крупнейшая технологическая конференция"
+      }
+    ]
+  },
+  "BA/PM": {
+    "title": "📊 BA & PM Конференции",
+    "description": "Конференции для бизнес-аналитиков и продакт-менеджеров",
+    "links": [
+      {
+        "name": "BA World",
+        "url": "https://www.baworld.com/",
+        "description": "Всемирная конференция бизнес-аналитиков"
+      },
+      {
+        "name": "Product Management Summit",
+        "url": "https://www.productsummit.com/",
+        "description": "Саммит продакт-менеджеров"
+      },
+      {
+        "name": "Agile Conference",
+        "url": "https://www.agileconference.com/",
+        "description": "Конференция по гибким методологиям"
+      },
+      {
+        "name": "Requirements Engineering",
+        "url": "https://www.reconference.com/",
+        "description": "Конференция по инженерии требований"
+      }
+    ]
+  },
+  "IT/Infra": {
+    "title": "🏗️ IT & Infrastructure Конференции",
+    "description": "Конференции по IT-инфраструктуре и системному администрированию",
+    "links": [
+      {
+        "name": "OpenStack Summit",
+        "url": "https://www.openstack.org/summit/",
+        "description": "Саммит OpenStack"
+      },
+      {
+        "name": "Kubernetes Community Days",
+        "url": "https://events.linuxfoundation.org/about/kubernetes-community-days/",
+        "description": "Дни сообщества Kubernetes"
+      },
+      {
+        "name": "Data Center World",
+        "url": "https://www.datacenterworld.com/",
+        "description": "Конференция по дата-центрам"
+      },
+      {
+        "name": "Gartner Data Center Conference",
+        "url": "https://www.gartner.com/en/conferences/na/data-center-infrastructure-operations",
+        "description": "Конференция Gartner по дата-центрам"
+      }
+    ]
+  },
+  "Fintech": {
+    "title": "💰 Fintech Конференции",
+    "description": "Конференции по финансовым технологиям и антифроду",
+    "links": [
+      {
+        "name": "FinTech Conference",
+        "url": "https://www.fintechconference.com/",
+        "description": "Конференция по финансовым технологиям"
+      },
+      {
+        "name": "Fraud Conference",
+        "url": "https://www.fraudconference.com/",
+        "description": "Конференция по борьбе с мошенничеством"
+      },
+      {
+        "name": "Risk Management Summit",
+        "url": "https://www.riskmanagementsummit.com/",
+        "description": "Саммит по управлению рисками"
+      },
+      {
+        "name": "Blockchain Conference",
+        "url": "https://www.blockchainconference.com/",
+        "description": "Конференция по блокчейну"
+      }
+    ]
+  }
+}

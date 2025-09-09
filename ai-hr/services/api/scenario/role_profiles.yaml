@@ -1,0 +1,85 @@
+version: "0.1"
+description: "Role profiles and block weights for AI-HR interview scenarios"
+
+profiles:
+  ba_anti_fraud:
+    name: "Бизнес-аналитик (антифрод)"
+    description: "Специалист по анализу и предотвращению мошеннических операций"
+    drill_threshold: 0.7
+    block_weights:
+      AntiFraud_Rules: 0.95
+        description: "Знание антифрод-правил и методов выявления мошенничества"
+        rationale: "Критически важно для основной функции роли"
+      Requirements_Engineering: 0.9
+        description: "Постановка задач и работа с требованиями"
+        rationale: "Ключевая компетенция бизнес-аналитика"
+      Stakeholders_Communication: 0.8
+        description: "Участие в проектах и взаимодействие с заинтересованными сторонами"
+        rationale: "Важно для успешной реализации проектов"
+      SQL_DB_Basics: 0.7
+        description: "Принципы работы с СУБД и SQL"
+        rationale: "Необходимо для анализа данных и создания отчетов"
+      Protocols_APIs: 0.7
+        description: "Протоколы и технологии интеграции"
+        rationale: "Важно для работы с внешними системами"
+      DBO_Cards_UL: 0.75
+        description: "Корпоративные карты и ДБО для юридических лиц"
+        rationale: "Специфические знания для антифрод-анализа"
+      Payment_Systems_Rules: 0.8
+        description: "Платёжные системы и их правила"
+        rationale: "Критично для понимания процессов мошенничества"
+      Testing_UAT: 0.75
+        description: "Тест-кейсы и пользовательское тестирование"
+        rationale: "Важно для валидации антифрод-решений"
+      Documentation: 0.65
+        description: "Ведение документации и отчетности"
+        rationale: "Необходимо для аудита и соответствия требованиям"
+
+  it_dc_ops:
+    name: "Ведущий специалист ИТ (ЦОД)"
+    description: "Специалист по эксплуатации и администрированию дата-центра"
+    drill_threshold: 0.7
+    block_weights:
+      DC_HW_x86_RAID_BMC: 0.95
+        description: "x86 серверы, BIOS, BMC, RAID-контроллеры"
+        rationale: "Критически важно для работы с серверным оборудованием"
+      LAN_SAN_Networking: 0.9
+        description: "LAN, SAN, сетевое оборудование и протоколы"
+        rationale: "Основа инфраструктуры ЦОД"
+      SCS_Cabling_Optics: 0.8
+        description: "СКС, оптоволокно, кабельные системы"
+        rationale: "Физическая инфраструктура критична для ЦОД"
+      Incident_Handling: 0.9
+        description: "Обработка инцидентов и аварийных ситуаций"
+        rationale: "Критично для обеспечения непрерывности работы"
+      DC_Housekeeping: 0.7
+        description: "Порядок в серверных, мониторинг среды"
+        rationale: "Важно для предотвращения инцидентов"
+      CMDB_DCIM_Reporting: 0.7
+        description: "CMDB, DCIM системы, отчетность"
+        rationale: "Необходимо для управления инфраструктурой"
+      OS_Imaging_GPO_AD: 0.8
+        description: "Образы ОС, групповые политики, Active Directory"
+        rationale: "Ключевые технологии для управления серверами"
+      Tooling_Excel_Visio: 0.6
+        description: "Excel, Visio, инструменты документирования"
+        rationale: "Важно для ведения документации и отчетов"
+      Soft_Skills_Clear_Speech: 0.6
+        description: "Грамотная речь, аккуратность, коммуникации"
+        rationale: "Необходимо для взаимодействия с командой и клиентами"
+
+# Дополнительные настройки
+settings:
+  default_drill_threshold: 0.7
+  max_questions_per_block: 5
+  min_questions_per_interview: 10
+  max_interview_duration_minutes: 60
+
+# Связь с JSON сценариями
+scenario_mapping:
+  ba_anti_fraud:
+    json_file: "ba_anti_fraud.json"
+    description: "Сценарий интервью для бизнес-аналитика антифрод"
+  it_dc_ops:
+    json_file: "it_dc_ops.json"
+    description: "Сценарий интервью для специалиста ИТ ЦОД"

@@ -1,0 +1,147 @@
+{
+  "id": "ba_anti_fraud_v1",
+  "role_profile": "ba_anti_fraud",
+  "schema_version": "0.1",
+  "name": "Бизнес-аналитик (антифрод)",
+  "description": "Сценарий интервью для специалиста по управлению комплексом антифрод и оптимизации правил",
+  "policy": {
+    "drill_threshold": 0.7,
+    "max_questions": 10,
+    "time_limit_minutes": 60
+  },
+  "start_id": "afr_l1_intro",
+  "nodes": [
+    {
+      "id": "afr_l1_intro",
+      "category": "AntiFraud_Rules",
+      "order": 1,
+      "weight": 0.4,
+      "question": "Опишите опыт настройки антифрод-правил и снижение ложноположительных срабатываний.",
+      "success_criteria": ["правила", "метрики", "FPR/TPR", "кейсы", "оптимизация"],
+      "followups": ["Приведите пример оптимизации правила и результат в цифрах"],
+      "next_if_fail": "req_l1_core",
+      "next_if_pass": "afr_l2_cases"
+    },
+    {
+      "id": "afr_l2_cases",
+      "category": "AntiFraud_Rules",
+      "order": 2,
+      "weight": 0.6,
+      "question": "Расскажите о кейсах выявления мошенничества. Какие паттерны и аномалии анализируете?",
+      "success_criteria": ["паттерны", "аномалии", "ML-модели", "статистика", "детекция"],
+      "followups": ["Как измеряете эффективность детекции? Какие метрики используете?"],
+      "next_if_fail": "req_l1_core",
+      "next_if_pass": "afr_l3_metrics"
+    },
+    {
+      "id": "afr_l3_metrics",
+      "category": "AntiFraud_Rules",
+      "order": 3,
+      "weight": 0.8,
+      "question": "Как вы балансируете между точностью детекции и количеством ложных срабатываний? Какие компромиссы принимаете?",
+      "success_criteria": ["баланс", "компромиссы", "бизнес-риски", "операционные затраты", "ROI"],
+      "followups": ["Приведите пример принятия решения по изменению порога срабатывания"],
+      "next_if_fail": "req_l1_core",
+      "next_if_pass": "req_l1_core"
+    },
+    {
+      "id": "req_l1_core",
+      "category": "Requirements_Engineering",
+      "order": 4,
+      "weight": 0.4,
+      "question": "Опишите процесс постановки требований к антифрод-системам. Как работаете с бизнесом?",
+      "success_criteria": ["требования", "бизнес-процессы", "стейкхолдеры", "документирование", "валидация"],
+      "followups": ["Как приоритизируете требования? Какие критерии используете?"],
+      "next_if_fail": "proj_l1_participation",
+      "next_if_pass": "req_l2_complex"
+    },
+    {
+      "id": "req_l2_complex",
+      "category": "Requirements_Engineering",
+      "order": 5,
+      "weight": 0.6,
+      "question": "Приведите пример сложного требования к антифрод-системе. Как его декомпозировали?",
+      "success_criteria": ["декомпозиция", "техническое задание", "зависимости", "риски", "тестирование"],
+      "followups": ["Какие были основные сложности? Как их решали?"],
+      "next_if_fail": "proj_l1_participation",
+      "next_if_pass": "proj_l1_participation"
+    },
+    {
+      "id": "proj_l1_participation",
+      "category": "Stakeholders_Communication",
+      "order": 6,
+      "weight": 0.4,
+      "question": "Расскажите об участии в проектах по антифрод. Какие роли выполняли?",
+      "success_criteria": ["проекты", "роли", "команды", "планирование", "отчетность"],
+      "followups": ["Как взаимодействуете с разработчиками и тестировщиками?"],
+      "next_if_fail": "test_l1_cases",
+      "next_if_pass": "proj_l2_conflicts"
+    },
+    {
+      "id": "proj_l2_conflicts",
+      "category": "Stakeholders_Communication",
+      "order": 7,
+      "weight": 0.6,
+      "question": "Как решаете конфликты между бизнес-требованиями и техническими ограничениями в антифрод?",
+      "success_criteria": ["конфликты", "медиация", "альтернативы", "компромиссы", "эскалация"],
+      "followups": ["Приведите пример успешного разрешения конфликта"],
+      "next_if_fail": "test_l1_cases",
+      "next_if_pass": "test_l1_cases"
+    },
+    {
+      "id": "test_l1_cases",
+      "category": "Testing_UAT",
+      "order": 8,
+      "weight": 0.4,
+      "question": "Как разрабатываете тест-кейсы для антифрод-правил? Какие данные используете?",
+      "success_criteria": ["тест-кейсы", "тестовые данные", "сценарии", "валидация", "UAT"],
+      "followups": ["Как обеспечиваете покрытие различных типов мошенничества?"],
+      "next_if_fail": "pay_l1_systems",
+      "next_if_pass": "test_l2_automation"
+    },
+    {
+      "id": "test_l2_automation",
+      "category": "Testing_UAT",
+      "order": 9,
+      "weight": 0.6,
+      "question": "Опишите процесс автоматизации тестирования антифрод-правил. Какие инструменты используете?",
+      "success_criteria": ["автоматизация", "CI/CD", "регрессия", "мониторинг", "инструменты"],
+      "followups": ["Как обеспечиваете качество тестовых данных?"],
+      "next_if_fail": "pay_l1_systems",
+      "next_if_pass": "pay_l1_systems"
+    },
+    {
+      "id": "pay_l1_systems",
+      "category": "Payment_Systems_Rules",
+      "order": 10,
+      "weight": 0.4,
+      "question": "Какие платёжные системы и ДБО для ЮЛ знаете? Как их особенности влияют на антифрод?",
+      "success_criteria": ["платёжные системы", "ДБО ЮЛ", "ПОД-ФТ", "регламенты", "риски"],
+      "followups": ["Какие специфические риски характерны для корпоративных клиентов?"],
+      "next_if_fail": "pay_l2_compliance",
+      "next_if_pass": "pay_l2_compliance"
+    },
+    {
+      "id": "pay_l2_compliance",
+      "category": "Payment_Systems_Rules",
+      "order": 11,
+      "weight": 0.6,
+      "question": "Как обеспечиваете соответствие требованиям ПОД-ФТ и регуляторов в антифрод-системах?",
+      "success_criteria": ["ПОД-ФТ", "регуляторы", "соответствие", "аудит", "отчетность"],
+      "followups": ["Какие изменения в регуляторных требованиях отслеживаете?"],
+      "next_if_fail": "final_assessment",
+      "next_if_pass": "final_assessment"
+    },
+    {
+      "id": "final_assessment",
+      "category": "Overall",
+      "order": 12,
+      "weight": 1.0,
+      "question": "Какие у вас вопросы о позиции? Что мотивирует в работе с антифрод-системами?",
+      "success_criteria": ["вопросы", "мотивация", "понимание роли", "цели", "развитие"],
+      "followups": ["Как видите развитие антифрод-технологий?"],
+      "next_if_pass": null,
+      "next_if_fail": null
+    }
+  ]
+}

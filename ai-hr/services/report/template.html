@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Report - {{ candidate.name or 'Candidate' }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 2.2em;
+        }
+        
+        .header .subtitle {
+            color: #7f8c8d;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .match-score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 10px 0;
+        }
+        
+        .rating {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        
+        .candidate-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .candidate-info h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .info-section h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .score-cell {
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .score-excellent { color: #27ae60; }
+        .score-good { color: #f39c12; }
+        .score-average { color: #e67e22; }
+        .score-poor { color: #e74c3c; }
+        
+        .strengths, .weaknesses {
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .strengths {
+            background-color: #d5f4e6;
+            border-left: 5px solid #27ae60;
+        }
+        
+        .strengths h3 {
+            color: #27ae60;
+            margin-top: 0;
+        }
+        
+        .weaknesses {
+            background-color: #fadbd8;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .weaknesses h3 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        
+        .strengths ul, .weaknesses ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .strengths li, .weaknesses li {
+            margin: 8px 0;
+        }
+        
+        .quotes {
+            margin: 30px 0;
+        }
+        
+        .quotes h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        .quote {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .quote-text {
+            font-style: italic;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .quote-source {
+            font-weight: bold;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .report-id {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        
+        @media print {
+            body { margin: 0; padding: 15px; }
+            .header { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Interview Report</h1>
+        <div class="subtitle">AI-HR Assessment Results</div>
+        <div class="match-score">{{ overall_match }}% Match</div>
+        <div class="rating">{{ rating }}/10 - {{ rating_description }}</div>
+        <div class="report-id">Report ID: {{ report_id }}</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="candidate-info">
+            <h3>Candidate Information</h3>
+            <p><strong>Name:</strong> {{ candidate.name or 'N/A' }}</p>
+            <p><strong>Position:</strong> {{ vacancy.title or 'N/A' }}</p>
+            <p><strong>Experience:</strong> {{ candidate.experience or 'N/A' }}</p>
+            <p><strong>Location:</strong> {{ candidate.location or 'N/A' }}</p>
+            {% if candidate.email %}
+            <p><strong>Email:</strong> {{ candidate.email }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="candidate-info">
+            <h3>Job Requirements</h3>
+            <p><strong>Position:</strong> {{ vacancy.title or 'N/A' }}</p>
+            <p><strong>Department:</strong> {{ vacancy.department or 'N/A' }}</p>
+            <p><strong>Level:</strong> {{ vacancy.level or 'N/A' }}</p>
+            <p><strong>Location:</strong> {{ vacancy.location or 'N/A' }}</p>
+            {% if vacancy.salary_range %}
+            <p><strong>Salary Range:</strong> {{ vacancy.salary_range }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="info-section">
+        <h3>Skills Assessment</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Skill Block</th>
+                    <th>Score</th>
+                    <th>Weight</th>
+                    <th>Weighted Score</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for block in blocks %}
+                <tr>
+                    <td>{{ block.name }}</td>
+                    <td class="score-cell score-{% if block.score >= 0.8 %}excellent{% elif block.score >= 0.6 %}good{% elif block.score >= 0.4 %}average{% else %}poor{% endif %}">
+                        {{ "%.1f"|format(block.score * 100) }}%
+                    </td>
+                    <td class="score-cell">{{ "%.1f"|format(block.weight * 100) }}%</td>
+                    <td class="score-cell">{{ "%.1f"|format(block.score * block.weight * 100) }}%</td>
+                    <td>
+                        {% if block.score >= 0.8 %}
+                            Excellent
+                        {% elif block.score >= 0.6 %}
+                            Good
+                        {% elif block.score >= 0.4 %}
+                            Average
+                        {% else %}
+                            Needs Improvement
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if positives %}
+    <div class="strengths">
+        <h3>✅ Strengths</h3>
+        <ul>
+            {% for positive in positives %}
+            <li>{{ positive }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if negatives %}
+    <div class="weaknesses">
+        <h3>⚠️ Areas for Improvement</h3>
+        <ul>
+            {% for negative in negatives %}
+            <li>{{ negative }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if quotes %}
+    <div class="quotes">
+        <h3>📝 Evidence & Quotes</h3>
+        {% for quote in quotes %}
+        <div class="quote">
+            <div class="quote-text">"{{ quote.text }}"</div>
+            <div class="quote-source">— {{ quote.source }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="footer">
+        <p>Report generated on {{ generated_at }}</p>
+        <p>AI-HR Interview Assessment System</p>
+    </div>
+</body>
+</html>

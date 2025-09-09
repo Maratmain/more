@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.1",
+  "policy": {
+    "drill_threshold": 0.7
+  },
+  "start_id": "django_l1_intro",
+  "nodes": [
+    {
+      "id": "django_l1_intro",
+      "category": "python_backend",
+      "order": 1,
+      "question": "Расскажите о вашем опыте работы с Django",
+      "weight": 1.0,
+      "success_criteria": ["django", "python", "веб-разработка", "опыт", "проекты"],
+      "followups": ["Какие версии Django вы использовали?", "Опишите самый сложный проект"],
+      "next_if_fail": "django_l2_basics",
+      "next_if_pass": "django_l3_advanced"
+    },
+    {
+      "id": "django_l2_basics",
+      "category": "python_backend",
+      "order": 2,
+      "question": "Объясните основные концепции Django: модели, представления, шаблоны",
+      "weight": 0.8,
+      "success_criteria": ["модели", "представления", "шаблоны", "mvc", "mvt", "orm"],
+      "followups": ["Как работает Django ORM?", "Что такое middleware?"],
+      "next_if_fail": "django_l3_advanced",
+      "next_if_pass": "django_l4_expert"
+    },
+    {
+      "id": "django_l3_advanced",
+      "category": "python_backend",
+      "order": 3,
+      "question": "Как вы решали проблемы производительности в Django?",
+      "weight": 0.9,
+      "success_criteria": ["кеширование", "оптимизация", "запросы", "индексы", "база данных"],
+      "followups": ["Использовали ли Redis?", "Как работали с N+1 проблемой?"],
+      "next_if_fail": "django_l4_expert",
+      "next_if_pass": "django_l4_expert"
+    },
+    {
+      "id": "django_l4_expert",
+      "category": "python_backend",
+      "order": 4,
+      "question": "Опишите архитектуру сложного Django приложения",
+      "weight": 1.0,
+      "success_criteria": ["микросервисы", "api", "архитектура", "масштабирование", "deployment"],
+      "followups": ["Как организовали тестирование?", "CI/CD процессы?"],
+      "next_if_fail": null,
+      "next_if_pass": null
+    }
+  ]
+}

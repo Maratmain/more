@@ -1,0 +1,147 @@
+{
+  "id": "it_dc_ops_v1",
+  "role_profile": "it_dc_ops",
+  "schema_version": "0.1",
+  "name": "Ведущий специалист ИТ (ЦОД)",
+  "description": "Сценарий интервью для специалиста по эксплуатации и администрированию дата-центра",
+  "policy": {
+    "drill_threshold": 0.7,
+    "max_questions": 10,
+    "time_limit_minutes": 60
+  },
+  "start_id": "hw_l1_install",
+  "nodes": [
+    {
+      "id": "hw_l1_install",
+      "category": "DC_HW_x86_RAID_BMC",
+      "order": 1,
+      "weight": 0.4,
+      "question": "Опишите процесс монтажа и демонтажа x86 серверов в стойке. Какие инструменты используете?",
+      "success_criteria": ["монтаж", "демонтаж", "стойка", "инструменты", "безопасность"],
+      "followups": ["Как обеспечиваете безопасность при работе с оборудованием?"],
+      "next_if_fail": "hw_l2_raid_bmc",
+      "next_if_pass": "hw_l2_raid_bmc"
+    },
+    {
+      "id": "hw_l2_raid_bmc",
+      "category": "DC_HW_x86_RAID_BMC",
+      "order": 2,
+      "weight": 0.6,
+      "question": "Расскажите о первичной настройке BIOS, BMC и RAID-контроллеров. Какие параметры критичны?",
+      "success_criteria": ["BIOS", "BMC", "RAID", "настройка", "параметры"],
+      "followups": ["Какие настройки безопасности обязательны для новых серверов?"],
+      "next_if_fail": "hw_l3_incidents",
+      "next_if_pass": "hw_l3_incidents"
+    },
+    {
+      "id": "hw_l3_incidents",
+      "category": "DC_HW_x86_RAID_BMC",
+      "order": 3,
+      "weight": 0.8,
+      "question": "Опишите типичные инциденты с x86 серверами. Как диагностируете и устраняете аварии?",
+      "success_criteria": ["инциденты", "диагностика", "аварии", "восстановление", "профилактика"],
+      "followups": ["Приведите пример критического инцидента и ваших действий"],
+      "next_if_fail": "net_l1_lan_san",
+      "next_if_pass": "net_l1_lan_san"
+    },
+    {
+      "id": "net_l1_lan_san",
+      "category": "LAN_SAN_Networking",
+      "order": 4,
+      "weight": 0.4,
+      "question": "Как подключаете серверы к LAN и SAN? Какие кабели и разъемы используете?",
+      "success_criteria": ["LAN", "SAN", "подключение", "кабели", "разъемы"],
+      "followups": ["Как тестируете подключения? Какие инструменты используете?"],
+      "next_if_fail": "net_l2_troubleshooting",
+      "next_if_pass": "net_l2_troubleshooting"
+    },
+    {
+      "id": "net_l2_troubleshooting",
+      "category": "LAN_SAN_Networking",
+      "order": 5,
+      "weight": 0.6,
+      "question": "Опишите процесс диагностики сетевых проблем в ЦОД. Какие метрики отслеживаете?",
+      "success_criteria": ["диагностика", "метрики", "мониторинг", "производительность", "отказоустойчивость"],
+      "followups": ["Как обеспечиваете отказоустойчивость сетевой инфраструктуры?"],
+      "next_if_fail": "cable_l1_scs",
+      "next_if_pass": "cable_l1_scs"
+    },
+    {
+      "id": "cable_l1_scs",
+      "category": "SCS_Cabling_Optics",
+      "order": 6,
+      "weight": 0.4,
+      "question": "Расскажите о работе с СКС и оптоволокном. Какие стандарты соблюдаете?",
+      "success_criteria": ["СКС", "оптоволокно", "стандарты", "маркировка", "тестирование"],
+      "followups": ["Как обеспечиваете порядок в кабельной системе?"],
+      "next_if_fail": "cable_l2_maintenance",
+      "next_if_pass": "cable_l2_maintenance"
+    },
+    {
+      "id": "cable_l2_maintenance",
+      "category": "SCS_Cabling_Optics",
+      "order": 7,
+      "weight": 0.6,
+      "question": "Как поддерживаете порядок в серверных? Какие процедуры мониторинга среды выполняете?",
+      "success_criteria": ["порядок", "мониторинг", "процедуры", "температура", "влажность"],
+      "followups": ["Какие параметры среды критичны для оборудования?"],
+      "next_if_fail": "sys_l1_os_imaging",
+      "next_if_pass": "sys_l1_os_imaging"
+    },
+    {
+      "id": "sys_l1_os_imaging",
+      "category": "OS_Imaging_GPO_AD",
+      "order": 8,
+      "weight": 0.4,
+      "question": "Опишите процесс создания образов ОС и развертывания. Какие инструменты используете?",
+      "success_criteria": ["образы ОС", "развертывание", "инструменты", "автоматизация", "стандартизация"],
+      "followups": ["Как обеспечиваете безопасность образов?"],
+      "next_if_fail": "sys_l2_ad_gpo",
+      "next_if_pass": "sys_l2_ad_gpo"
+    },
+    {
+      "id": "sys_l2_ad_gpo",
+      "category": "OS_Imaging_GPO_AD",
+      "order": 9,
+      "weight": 0.6,
+      "question": "Расскажите о работе с Active Directory и групповыми политиками. Как управляете пользователями?",
+      "success_criteria": ["Active Directory", "GPO", "пользователи", "безопасность", "политики"],
+      "followups": ["Как обеспечиваете соответствие политикам безопасности?"],
+      "next_if_fail": "cmdb_l1_systems",
+      "next_if_pass": "cmdb_l1_systems"
+    },
+    {
+      "id": "cmdb_l1_systems",
+      "category": "CMDB_DCIM_Reporting",
+      "order": 10,
+      "weight": 0.4,
+      "question": "Какие CMDB и DCIM системы знаете? Как ведете инвентаризацию оборудования?",
+      "success_criteria": ["CMDB", "DCIM", "инвентаризация", "отчетность", "актуализация"],
+      "followups": ["Как обеспечиваете актуальность данных в CMDB?"],
+      "next_if_fail": "cmdb_l2_analytics",
+      "next_if_pass": "cmdb_l2_analytics"
+    },
+    {
+      "id": "cmdb_l2_analytics",
+      "category": "CMDB_DCIM_Reporting",
+      "order": 11,
+      "weight": 0.6,
+      "question": "Какие отчеты готовите по инфраструктуре? Как используете Excel и Visio для аналитики?",
+      "success_criteria": ["отчеты", "Excel", "Visio", "аналитика", "метрики"],
+      "followups": ["Какие KPI отслеживаете для ЦОД?"],
+      "next_if_fail": "final_assessment",
+      "next_if_pass": "final_assessment"
+    },
+    {
+      "id": "final_assessment",
+      "category": "Overall",
+      "order": 12,
+      "weight": 1.0,
+      "question": "Какие у вас вопросы о позиции? Что мотивирует в работе с инфраструктурой ЦОД?",
+      "success_criteria": ["вопросы", "мотивация", "понимание роли", "цели", "развитие"],
+      "followups": ["Как видите развитие технологий ЦОД?"],
+      "next_if_pass": null,
+      "next_if_fail": null
+    }
+  ]
+}

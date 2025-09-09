@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Dialog Manager Response Schema",
+  "description": "Strict JSON schema for DM responses to ensure consistent formatting",
+  "properties": {
+    "reply": {
+      "type": "string",
+      "description": "Short response text for the candidate",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "next_node_id": {
+      "type": ["string", "null"],
+      "description": "ID of the next interview node, or null if interview should end",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "scoring_update": {
+      "type": "object",
+      "description": "Scoring information for the current response",
+      "properties": {
+        "block": {
+          "type": "string",
+          "description": "Category/block name being evaluated",
+          "minLength": 1
+        },
+        "delta": {
+          "type": "number",
+          "description": "Score change from previous score",
+          "minimum": -1.0,
+          "maximum": 1.0
+        },
+        "score": {
+          "type": "number",
+          "description": "Current score for this block",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      },
+      "required": ["block", "score"],
+      "additionalProperties": false
+    },
+    "red_flags": {
+      "type": "array",
+      "description": "List of red flags detected in the response",
+      "items": {
+        "type": "string",
+        "enum": [
+          "low_confidence",
+          "very_short_response",
+          "off_topic",
+          "contradiction",
+          "lack_of_experience",
+          "unclear_explanation",
+          "missing_keywords",
+          "generic_response"
+        ]
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": ["reply", "scoring_update", "red_flags"],
+  "additionalProperties": false
+}

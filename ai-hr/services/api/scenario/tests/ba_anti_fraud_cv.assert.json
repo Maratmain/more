@@ -1,0 +1,117 @@
+{
+  "cv_id": "ba_anti_fraud_golden",
+  "profile": "ba_anti_fraud",
+  "description": "Эталонное резюме бизнес-аналитика (антифрод) для тестирования сценариев",
+  "cv_content": {
+    "experience": [
+      "3 года опыта работы с антифрод-системами в банковской сфере",
+      "Настройка и оптимизация правил выявления мошенничества",
+      "Снижение ложноположительных срабатываний на 25%",
+      "Моделирование бизнес-процессов с использованием Camunda/BPMN",
+      "Проведение UX-исследований и создание Customer Journey Map (CJM)",
+      "Работа с требованиями к платежным системам и ДБО для ЮЛ",
+      "Разработка тест-кейсов и проведение UAT для антифрод-модулей"
+    ],
+    "skills": [
+      "Анализ рисков мошенничества и создание предиктивных моделей",
+      "SQL для анализа транзакционных данных",
+      "Confluence/Jira для документирования процессов",
+      "Знание регуляторных требований ПОД-ФТ",
+      "Работа с большими данными и машинным обучением",
+      "Интеграция с внешними системами через API"
+    ],
+    "tools": [
+      "Camunda/BPMN",
+      "Confluence",
+      "Jira",
+      "SQL (PostgreSQL, Oracle)",
+      "Python (pandas, scikit-learn)",
+      "Tableau для аналитики"
+    ]
+  },
+  "expected_path": {
+    "description": "Ожидаемый путь прохождения интервью на основе заявленных навыков",
+    "nodes": [
+      {
+        "node_id": "afr_l1_intro",
+        "expected_score": 0.8,
+        "reason": "Есть опыт настройки антифрод-правил и снижения FPR"
+      },
+      {
+        "node_id": "afr_l2_cases",
+        "expected_score": 0.9,
+        "reason": "Опыт с ML-моделями и анализом паттернов мошенничества"
+      },
+      {
+        "node_id": "afr_l3_metrics",
+        "expected_score": 0.85,
+        "reason": "Конкретные результаты по снижению ложных срабатываний"
+      },
+      {
+        "node_id": "req_l1_core",
+        "expected_score": 0.9,
+        "reason": "Опыт работы с требованиями и BPMN-моделированием"
+      },
+      {
+        "node_id": "req_l2_complex",
+        "expected_score": 0.8,
+        "reason": "Сложные проекты по интеграции антифрод-систем"
+      },
+      {
+        "node_id": "proj_l1_participation",
+        "expected_score": 0.85,
+        "reason": "Активное участие в проектах с использованием Jira/Confluence"
+      },
+      {
+        "node_id": "proj_l2_conflicts",
+        "expected_score": 0.7,
+        "reason": "Опыт работы с бизнесом и техническими командами"
+      },
+      {
+        "node_id": "test_l1_cases",
+        "expected_score": 0.9,
+        "reason": "Прямой опыт разработки тест-кейсов для антифрод"
+      },
+      {
+        "node_id": "test_l2_automation",
+        "expected_score": 0.75,
+        "reason": "Опыт с Python и автоматизацией процессов"
+      },
+      {
+        "node_id": "pay_l1_systems",
+        "expected_score": 0.9,
+        "reason": "Знание ДБО ЮЛ и платежных систем"
+      },
+      {
+        "node_id": "pay_l2_compliance",
+        "expected_score": 0.85,
+        "reason": "Знание ПОД-ФТ и регуляторных требований"
+      }
+    ]
+  },
+  "test_scenarios": [
+    {
+      "scenario": "Strong candidate",
+      "description": "Кандидат с полным опытом по всем блокам",
+      "expected_overall_score": 0.85,
+      "expected_strengths": ["AntiFraud_Rules", "Requirements_Engineering", "Testing_UAT", "Payment_Systems_Rules"],
+      "expected_weaknesses": []
+    },
+    {
+      "scenario": "Partial experience",
+      "description": "Кандидат без опыта с ML-моделями",
+      "cv_modifications": {
+        "remove_skills": ["машинное обучение", "ML-модели", "scikit-learn"]
+      },
+      "expected_overall_score": 0.75,
+      "expected_strengths": ["Requirements_Engineering", "Testing_UAT"],
+      "expected_weaknesses": ["AntiFraud_Rules"]
+    }
+  ],
+  "validation_rules": {
+    "min_expected_score": 0.7,
+    "required_strengths": ["AntiFraud_Rules", "Requirements_Engineering"],
+    "acceptable_weaknesses": ["Soft_Skills_Clear_Speech"],
+    "critical_failures": ["Payment_Systems_Rules"]
+  }
+}

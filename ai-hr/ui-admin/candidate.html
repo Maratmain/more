@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-HR - Кандидат</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .candidate-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .info-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .info-value {
+            color: #333;
+        }
+
+        .scores-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .score-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .score-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .score-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .score-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .questions-section {
+            margin-bottom: 40px;
+        }
+
+        .questions-list {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .question-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .question-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .question-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-score {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .question-text {
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .red-flags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .red-flag {
+            background: #ff6b6b;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .candidate-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .scores-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👤 Профиль кандидата</h1>
+            <p>Детальная информация и оценки</p>
+        </div>
+
+        <div class="content">
+            <div id="loading" class="loading">
+                <h3>Загрузка данных кандидата...</h3>
+            </div>
+
+            <div id="error" class="error" style="display: none;">
+                <h3>Ошибка загрузки</h3>
+                <p id="error-message"></p>
+            </div>
+
+            <div id="candidate-content" style="display: none;">
+                <!-- Candidate Info -->
+                <div class="candidate-info">
+                    <div class="info-card">
+                        <h3>📋 Основная информация</h3>
+                        <div class="info-item">
+                            <span class="info-label">ID:</span>
+                            <span class="info-value" id="candidate-id">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value" id="candidate-email">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Телефон:</span>
+                            <span class="info-value" id="candidate-phone">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Статус:</span>
+                            <span class="info-value" id="candidate-status">-</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>📊 Общая оценка</h3>
+                        <div class="info-item">
+                            <span class="info-label">Рейтинг:</span>
+                            <span class="info-value" id="overall-rating">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Рекомендация:</span>
+                            <span class="info-value" id="recommendation">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Дата интервью:</span>
+                            <span class="info-value" id="interview-date">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Время интервью:</span>
+                            <span class="info-value" id="interview-duration">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scores Section -->
+                <div class="scores-section">
+                    <h2 class="section-title">📈 Оценки по блокам</h2>
+                    <div class="scores-grid" id="scores-grid">
+                        <!-- Scores will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Questions Section -->
+                <div class="questions-section">
+                    <h2 class="section-title">❓ Вопросы и ответы</h2>
+                    <div class="questions-list" id="questions-list">
+                        <!-- Questions will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="actions">
+                    <a href="#" class="btn btn-primary" id="download-pdf">📄 Скачать PDF отчёт</a>
+                    <a href="/" class="btn btn-secondary">🏠 На главную</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get candidate ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const candidateId = urlParams.get('id') || 'demo_123';
+
+        // API endpoints
+        const API_BASE = 'http://localhost:8001';
+        const REPORT_BASE = 'http://localhost:8005';
+
+        async function loadCandidateData() {
+            try {
+                // Load candidate basic info
+                const candidateResponse = await fetch(`${API_BASE}/candidates/${candidateId}`);
+                if (!candidateResponse.ok) {
+                    throw new Error('Кандидат не найден');
+                }
+                const candidateData = await candidateResponse.json();
+
+                // Load interview answers
+                const answersResponse = await fetch(`${API_BASE}/interview/${candidateId}/answers`);
+                if (!answersResponse.ok) {
+                    throw new Error('Данные интервью не найдены');
+                }
+                const answersData = await answersResponse.json();
+
+                // Populate candidate info
+                document.getElementById('candidate-id').textContent = candidateId;
+                document.getElementById('candidate-email').textContent = candidateData.email || 'Не указан';
+                document.getElementById('candidate-phone').textContent = candidateData.phone || 'Не указан';
+                document.getElementById('candidate-status').textContent = candidateData.status || 'Не указан';
+                document.getElementById('overall-rating').textContent = `${answersData.rating_0_10.toFixed(1)}/10`;
+                document.getElementById('recommendation').textContent = answersData.rating_0_10 >= 7 ? 'Рекомендован' : 'Требует рассмотрения';
+                document.getElementById('interview-date').textContent = new Date().toLocaleDateString('ru-RU');
+                document.getElementById('interview-duration').textContent = '45 минут';
+
+                // Populate scores
+                populateScores(candidateData.scores || {});
+
+                // Populate questions
+                populateQuestions(answersData.answers || []);
+
+                // Setup PDF download
+                document.getElementById('download-pdf').href = `${REPORT_BASE}/report/web/${candidateId}`;
+
+                // Show content
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('candidate-content').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading candidate data:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+            }
+        }
+
+        function populateScores(scores) {
+            const scoresGrid = document.getElementById('scores-grid');
+            scoresGrid.innerHTML = '';
+
+            for (const [block, score] of Object.entries(scores)) {
+                const scoreCard = document.createElement('div');
+                scoreCard.className = 'score-card';
+                
+                const percentage = Math.round(score * 100);
+                const scoreColor = score >= 0.8 ? '#28a745' : score >= 0.6 ? '#ffc107' : '#dc3545';
+                
+                scoreCard.innerHTML = `
+                    <div class="score-header">
+                        <span class="score-title">${block}</span>
+                        <span class="score-value">${score.toFixed(2)}</span>
+                    </div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: ${percentage}%; background: ${scoreColor};"></div>
+                    </div>
+                    <div style="text-align: center; color: #666; font-size: 0.9rem;">
+                        ${percentage}% соответствия
+                    </div>
+                `;
+                
+                scoresGrid.appendChild(scoreCard);
+            }
+        }
+
+        function populateQuestions(answers) {
+            const questionsList = document.getElementById('questions-list');
+            questionsList.innerHTML = '';
+
+            answers.forEach((answer, index) => {
+                const questionItem = document.createElement('div');
+                questionItem.className = 'question-item';
+                
+                const scoreColor = answer.score >= 0.8 ? '#28a745' : answer.score >= 0.6 ? '#ffc107' : '#dc3545';
+                
+                let redFlagsHtml = '';
+                if (answer.red_flags && answer.red_flags.length > 0) {
+                    redFlagsHtml = `
+                        <div class="red-flags">
+                            ${answer.red_flags.map(flag => `<span class="red-flag">${flag}</span>`).join('')}
+                        </div>
+                    `;
+                }
+                
+                questionItem.innerHTML = `
+                    <div class="question-header">
+                        <span class="question-number">Q${answer.order}</span>
+                        <span class="question-score" style="color: ${scoreColor};">${answer.score.toFixed(2)}</span>
+                    </div>
+                    <div class="question-text">${answer.question_text}</div>
+                    <div class="question-meta">
+                        <span>Блок: ${answer.block}</span>
+                        <span>Вес: ${answer.weight}</span>
+                    </div>
+                    ${redFlagsHtml}
+                `;
+                
+                questionsList.appendChild(questionItem);
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', loadCandidateData);
+    </script>
+</body>
+</html>
